@@ -4,33 +4,29 @@
 #include <cmath>
 #include <string>
 #include <iostream>
+#include <assert.h>
+#include "AssetManager.h"
 
 int main() {
 
 	sf::RenderWindow window(sf::VideoMode(640, 480), "Title");
-
 	window.setFramerateLimit(60);
 
-	sf::Texture leaf_tex;
-	leaf_tex.loadFromFile("img/leaf.png");
-	leaf_tex.setRepeated(true);
+	AssetManager manager;
 
-	sf::RectangleShape rect(sf::Vector2f(100, 200));
-	rect.setTextureRect(sf::IntRect(20, 20, 10000, 20000));
+	sf::Sprite sprite1 = sf::Sprite(AssetManager::GetTexture("myTexture1.png"));
+	sf::Sprite sprite2 = sf::Sprite(AssetManager::GetTexture("myTexture2.png"));
+	sf::Sprite sprite3(AssetManager::GetTexture("myTexture1.png"));
 
-	rect.setTexture(&leaf_tex); 
-	rect.setOutlineColor(sf::Color::White);
-	rect.setOutlineThickness(3);
-	rect.setPosition(50, 50);
+	float speed = 2;
 
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::EventType::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
 				window.close();
 		}
 		window.clear();
-		window.draw(rect);
 		window.display();
 	}
 	return 0;
