@@ -1,3 +1,2 @@
 ﻿  main.cpp
-D:\GitHub\sfml\01\01\main.cpp(77,21): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
   01.vcxproj -> D:\GitHub\sfml\01\Debug\01.exe
