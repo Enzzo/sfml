@@ -8,7 +8,7 @@ int main() {
 
 	sf::Sprite sprite1(AssetManager::GetTexture("myTexture1.png"));
 	sf::Sprite sprite2(AssetManager::GetTexture("myTexture2.png"));
-	sf::Sprite sprite3(AssetManager::GetTexture("myTexture3.png"));
+	sf::Sprite sprite3(AssetManager::GetTexture("myTexture1.png"));
 
 	sprite1.setPosition(20, 20);
 	sprite2.setPosition(80, 80);
@@ -20,7 +20,7 @@ int main() {
 
 	while (window.isOpen()) {
 		deltaTime = clock.restart();
-		std::cout << deltaTime.asSeconds()<< std::endl;
+		std::cout << deltaTime.asSeconds() << std::endl;
 
 		elapsedTime += deltaTime;
 		if (elapsedTime > sf::seconds(5))window.close();
