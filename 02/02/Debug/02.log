@@ -1,2 +1,2 @@
 ﻿  main.cpp
-  02.vcxproj -> D:\GitHub\sfml\02\Debug\02.exe
+D:\GitHub\sfml\02\02\main.cpp(27,82): error C2296: %: недопустимо, левый операнд имеет тип "double"
