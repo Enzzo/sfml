@@ -10,7 +10,7 @@ public:
 	AssetManager();
 	static AssetManager* instance;
 
-	static sf::Texture& GetTexture(const std::string&);
+	static sf::Texture& GetTexture(const std::string&, const bool);
 
 private:
 	std::map<std::string, sf::Texture> mapTex;
