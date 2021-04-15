@@ -1,5 +1,8 @@
 #include <SFML/Graphics.hpp>
+
 #include <iostream>
+
+#include "AssetManager.h"
 
 int main() {
 
