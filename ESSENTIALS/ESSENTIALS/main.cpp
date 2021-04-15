@@ -6,6 +6,8 @@
 
 int main() {
 
+	AssetManager am;
+
 	sf::RenderWindow window(sf::VideoMode(640, 480), "Title");
 	window.setFramerateLimit(60);
 
