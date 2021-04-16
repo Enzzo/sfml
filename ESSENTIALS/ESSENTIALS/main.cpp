@@ -21,17 +21,17 @@ int main() {
 	rectShape.setPosition(320, 240);
 
 	int frames = 8;
-	float animDuration = 1; //sec
+	int animSpeed = 18; //sec
 
 	std::chrono::time_point begin = std::chrono::steady_clock::now();
 
 	while (window.isOpen()) {
 		sf::Event event;
 		std::chrono::time_point end = std::chrono::steady_clock::now();
-		std::chrono::seconds delta = std::chrono::duration_cast<std::chrono::seconds>(end - begin);
+		std::chrono::milliseconds delta = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
 
-		int frame = (static_cast<int>(static_cast<float>(delta.count()/animDuration) * frames) % frames) * 32;
-		std::cerr << static_cast<int>(static_cast<float>(delta.count() / animDuration) * frames)  << std::endl;
+		int frame = delta.count() / static_cast<int>(1000 / animSpeed) % frames * 32;
+		std::cerr << frame << std::endl;
 		rectShape.setTextureRect(sf::IntRect(frame, 0, 32, 32));
 		
 		while (window.pollEvent(event)) {
