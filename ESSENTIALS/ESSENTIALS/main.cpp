@@ -13,6 +13,10 @@ int main() {
 	sf::RenderWindow window(sf::VideoMode(640, 480), "Title");
 	window.setFramerateLimit(60);
 
+	const sf::Vector2u &w_size = window.getSize();
+	sf::View view(sf::FloatRect(0, 0, w_size.x, w_size.y));
+	window.setView(view);
+
 	sf::Vector2i spriteSize(32, 32);
 	sf::Sprite sprite;
 	Animator animator(sprite);
@@ -24,12 +28,13 @@ int main() {
 	auto& idleAnimationShort = animator.CreateAnimation("IdleShort", "sprites\\gem_blue.png", sf::seconds(.5f), true);
 	idleAnimationShort.AddFrames(sf::Vector2i(0, 0), spriteSize, 8);
 
-	auto& idleAnimationSmall = animator.CreateAnimation("IdleSmall", "myTexture.png", sf::seconds(1.5f), true);
-	idleAnimationSmall.AddFrames(sf::Vector2i(64, 0), spriteSize, 3);
-	idleAnimationSmall.AddFrames(sf::Vector2i(64, 32), spriteSize, 2);
+	auto& idleAnimationSmall = animator.CreateAnimation("IdleSmall", "sprites\\gem_blue.png", sf::seconds(1.5f), true);
+	idleAnimationSmall.AddFrames(sf::Vector2i(32, 0), spriteSize, 3);
+	idleAnimationSmall.AddFrames(sf::Vector2i(64, 0), spriteSize, 2);
 
 	auto& idleAnimationOnce = animator.CreateAnimation("IdleOnce", "sprites\\gem_blue.png", sf::seconds(.5f), false);
 	idleAnimationOnce.AddFrames(sf::Vector2i(0, 0), spriteSize, 8);
+
 	sf::Clock clock;
 	while (window.isOpen()) {
 		
@@ -45,18 +50,22 @@ int main() {
 
 				if (event.key.code == sf::Keyboard::Key::A) {
 					animator.SwitchAnimation("Idle");
+					std::cerr.flush();
 					std::cerr << "\rIdle";
 				}
 				else if (event.key.code == sf::Keyboard::Key::S) {
 					animator.SwitchAnimation("IdleShort");
+					std::cerr.flush();
 					std::cerr << "\rIdleShort";
 				}
 				else if (event.key.code == sf::Keyboard::Key::D) {
 					animator.SwitchAnimation("IdleSmall");
+					std::cerr.flush();
 					std::cerr << "\rIdleSmall";
 				}
 				else if (event.key.code == sf::Keyboard::Key::F) {
 					animator.SwitchAnimation("IdleOnce");
+					std::cerr.flush(); 
 					std::cerr << "\rIdleOnce";
 				}
 			}
