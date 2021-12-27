@@ -21,8 +21,9 @@ AssetManager::AssetManager() {
 sf::Texture& AssetManager::GetTexture(const std::string& path) {
 
 	std::map<std::string, sf::Texture>& mt = instance->m_texture;
+	auto t = mt.find(path);
 
-	if (mt.count(path) == 0) {
+	if (t == mt.end()) {
 		if (!mt[path].loadFromFile(path)) {
 			ABORT_TEXTURE(path);
 		}
