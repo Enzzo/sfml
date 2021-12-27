@@ -13,35 +13,57 @@ int main() {
 	sf::RenderWindow window(sf::VideoMode(640, 480), "Title");
 	window.setFramerateLimit(60);
 
-	sf::Texture t1(AssetManager::GetTexture("sprites\\gem_blue.png"));		
-	sf::RectangleShape rectShape(sf::Vector2f(50, 50));
+	sf::Vector2i spriteSize(32, 32);
+	sf::Sprite sprite;
+	Animator animator(sprite);
 
-	rectShape.setTexture(&t1);
-	rectShape.setOrigin(25, 25);
-	rectShape.setTextureRect(sf::IntRect(0, 0, 32, 32));
-	rectShape.setPosition(320, 240);
+	//Create an animation and get the reference to it
+	auto& idleAnimation = animator.CreateAnimation("Idle", "sprites\\gem_blue.png", sf::seconds(1), true);
+	idleAnimation.AddFrames(sf::Vector2i(0, 0), spriteSize, 8);
+	
+	auto& idleAnimationShort = animator.CreateAnimation("IdleShort", "sprites\\gem_blue.png", sf::seconds(.5f), true);
+	idleAnimationShort.AddFrames(sf::Vector2i(0, 0), spriteSize, 8);
 
-	int frames = 8;
-	int animSpeed = 18; //sec
+	auto& idleAnimationSmall = animator.CreateAnimation("IdleSmall", "myTexture.png", sf::seconds(1.5f), true);
+	idleAnimationSmall.AddFrames(sf::Vector2i(64, 0), spriteSize, 3);
+	idleAnimationSmall.AddFrames(sf::Vector2i(64, 32), spriteSize, 2);
 
-	std::chrono::time_point begin = std::chrono::steady_clock::now();
-
+	auto& idleAnimationOnce = animator.CreateAnimation("IdleOnce", "sprites\\gem_blue.png", sf::seconds(.5f), false);
+	idleAnimationOnce.AddFrames(sf::Vector2i(0, 0), spriteSize, 8);
+	sf::Clock clock;
 	while (window.isOpen()) {
-		sf::Event event;
-		std::chrono::time_point end = std::chrono::steady_clock::now();
-		std::chrono::milliseconds delta = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
-
-		int frame = delta.count() / static_cast<int>(1000 / animSpeed) % frames * 32;
-		std::cerr << frame << std::endl;
-		rectShape.setTextureRect(sf::IntRect(frame, 0, 32, 32));
 		
+		sf::Time deltaTime = clock.restart();
+		animator.Update(deltaTime);
+
+		sf::Event event;
 		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::EventType::Closed || event.key.code == sf::Keyboard::Key::Space)
-				window.close();
+			if (event.type == sf::Event::KeyPressed) {
+				if (event.key.code == sf::Keyboard::Escape) {
+					window.close();
+				}
+
+				if (event.key.code == sf::Keyboard::Key::A) {
+					animator.SwitchAnimation("Idle");
+					std::cerr << "\rIdle";
+				}
+				else if (event.key.code == sf::Keyboard::Key::S) {
+					animator.SwitchAnimation("IdleShort");
+					std::cerr << "\rIdleShort";
+				}
+				else if (event.key.code == sf::Keyboard::Key::D) {
+					animator.SwitchAnimation("IdleSmall");
+					std::cerr << "\rIdleSmall";
+				}
+				else if (event.key.code == sf::Keyboard::Key::F) {
+					animator.SwitchAnimation("IdleOnce");
+					std::cerr << "\rIdleOnce";
+				}
+			}
 		}
 
 		window.clear();
-		window.draw(rectShape);
+		window.draw(sprite);
 		window.display();
 	}
 
