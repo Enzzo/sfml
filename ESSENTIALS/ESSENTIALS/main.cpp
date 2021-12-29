@@ -19,6 +19,7 @@ int main() {
 
 	sf::Vector2i spriteSize(32, 32);
 	sf::Sprite sprite;
+	sprite.setPosition()
 	Animator animator(sprite);
 
 	//Create an animation and get the reference to it
