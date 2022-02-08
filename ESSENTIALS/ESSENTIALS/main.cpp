@@ -18,7 +18,14 @@ int main() {
 	sf::View view(sf::FloatRect(0, 0, w_size.x, w_size.y));
 	view.setCenter(sf::Vector2f(0, 0));
 
+<<<<<<< HEAD
 	std::vector<sf::View> view_list(4, sf::View(sf::FloatRect(0, 0, w_size.x, w_size.y)));
+=======
+	sf::Vector2i spriteSize(32, 32);
+	sf::Sprite sprite;
+	sprite.setPosition()
+	Animator animator(sprite);
+>>>>>>> 8de8dba5533fe72de3cdd835295326d9d5e253de
 
 	for (sf::View& v : view_list) {
 		v.setCenter(sf::Vector2f(0, 0));
