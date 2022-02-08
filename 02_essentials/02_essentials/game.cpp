@@ -1,23 +1,39 @@
 #include "game.h"
 
-Game::Game() :_window(sf::VideoMode(640, 480), "SFML Application") {
-	_player.setRadius(40.f);
-	_player.setPosition(100.f, 100.f);
-	_player.setFillColor(sf::Color::Cyan);
+Game::Game() :window_(sf::VideoMode(640, 480), "SFML Application")
+			, textures_()
+			, player_()
+			, time_per_frame_(sf::seconds(1.f / 60.f))
+			, player_speed_(500) {
+	
+	textures_.Load(Textures::Airplane, "Media\\Textures\\Eagle.png");
+
+	player_.setTexture(textures_.Get(Textures::Airplane));
+	player_.setPosition(100.f, 100.f);	
 }
 
-void Game::run() {
-	while (_window.isOpen()) {
-		ProcessEvents();
-		Update();
+void Game::Run() {
+
+	sf::Clock clock;
+	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+
+	while (window_.isOpen()) {
+		//ProcessEvents();
+		timeSinceLastUpdate += clock.restart();
+		
+		while (timeSinceLastUpdate > time_per_frame_) {
+			timeSinceLastUpdate -= time_per_frame_;
+			ProcessEvents();
+			Update(time_per_frame_);
+		}
+		
 		Render();
 	}
 }
 
 void Game::ProcessEvents() {
 	sf::Event event;
-	while (_window.pollEvent(event)) {
-
+	while (window_.pollEvent(event)) {
 		switch (event.type) {
 		case sf::Event::EventType::KeyPressed: {
 			HandlePlayerInterrupt(event.key.code, true);
@@ -28,23 +44,35 @@ void Game::ProcessEvents() {
 			break;
 		}
 		case sf::Event::Closed: {
-			_window.close();
+			window_.close();
+			break;
 		}
 		}
 	}
 }
 
-void Game::Update() {
+void Game::Update(const sf::Time deltaTime) {
+	sf::Vector2f movement(0.f, 0.f);
 
+	if (is_moving_up && player_.getPosition().y > 0)
+		movement.y -= player_speed_;
+	if (is_moving_down && player_.getPosition().y < window_.getSize().y - player_.getGlobalBounds().height)
+		movement.y += player_speed_;
+	if (is_moving_left && player_.getPosition(). x > 0)
+		movement.x -= player_speed_;
+	if (is_moving_right && player_.getPosition().x < window_.getSize().x - player_.getGlobalBounds().width)
+		movement.x += player_speed_;
+
+	player_.move(movement * deltaTime.asSeconds());
 }
 
 void Game::Render() {
-	_window.clear();
-	_window.draw(_player);
-	_window.display();
+	window_.clear();
+	window_.draw(player_);
+	window_.display();
 }
 
-void Game::HandlePlayerInterrupt(sf::Keyboard::Key key, bool is_pressed) {
+void Game::HandlePlayerInterrupt(const sf::Keyboard::Key key, const bool is_pressed) {
 	if (key == sf::Keyboard::Key::W) {
 		is_moving_up = is_pressed;
 	}

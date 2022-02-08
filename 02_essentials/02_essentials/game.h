@@ -2,19 +2,27 @@
 
 #include <SFML/Graphics.hpp>
 
-class Game {
-	sf::RenderWindow _window;
-	sf::CircleShape _player;
+#include "source_manager.h"
 
-	bool is_moving_up, is_moving_down, is_moving_left, is_moving_right;
+class Game {
+	sf::RenderWindow window_;
+	TextureHolder textures_;
+	sf::Sprite player_;
+	sf::Time time_per_frame_;
+	int player_speed_;
+
+	bool is_moving_up = false
+		,is_moving_down = false
+		,is_moving_left = false
+		,is_moving_right = false;
 
 public:
 	Game();
-	void run();
+	void Run();
 
 private:
 	void ProcessEvents();
-	void Update();
+	void Update(const sf::Time);
 	void Render();
 	void HandlePlayerInterrupt(const sf::Keyboard::Key, const bool);
 };
