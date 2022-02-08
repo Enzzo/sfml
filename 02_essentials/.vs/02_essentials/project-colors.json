@@ -5,7 +5,12 @@
       "ProjectGuid": "f44ca865-7a26-4e8f-8ce7-4c46e7a040fc",
       "DisplayName": "02_essentials",
       "ColorIndex": 0
+    },
+    "314871fc-860f-4ccb-8a11-f5ea1ef0c493": {
+      "ProjectGuid": "314871fc-860f-4ccb-8a11-f5ea1ef0c493",
+      "DisplayName": "02_essentials",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }

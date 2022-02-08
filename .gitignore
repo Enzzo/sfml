@@ -42,3 +42,6 @@
 *.suo
 
 Debug
+build
+VERSION
+MakeFile
