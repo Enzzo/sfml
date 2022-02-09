@@ -41,7 +41,7 @@ void ResourceHolder<Resource, Identifier>::Load(Identifier id, const std::string
 
 template<typename Resource, typename Identifier>
 template<typename Parameter>
-void ResourceHolder<Resource, Identifier>::Load<Parameter>(Identifier id, const std::string& filename, const Parameter& second_param) {
+void ResourceHolder<Resource, Identifier>::Load(Identifier id, const std::string& filename, const Parameter& second_param) {
 	std::unique_ptr<Resource> resource(new Resource());
 	if (!resource->loadFromFile(filename, second_param)) {
 		throw std::runtime_error("ResourceHolder::Load - Failed to load " + filename);
