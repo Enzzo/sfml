@@ -4,9 +4,9 @@
 
 #include "source_manager.h"
 
-class Game {
+class Game {	
 	sf::RenderWindow window_;
-	TextureHolder textures_;
+	ResourceHolder<sf::Texture, Textures::ID> textures_;
 	sf::Sprite player_;
 	sf::Time time_per_frame_;
 	int player_speed_;
