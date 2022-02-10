@@ -10,14 +10,14 @@ public:
 	typedef std::unique_ptr<SceneNode> Ptr;
 
 public:
-	SceneNode();
+	SceneNode() = default;
 
 	void AttachChild(Ptr);
 	Ptr DetachChild(const SceneNode&);
 
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
+	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const = 0;
 private:
 	std::vector<Ptr> children_;
 	SceneNode* parent_;

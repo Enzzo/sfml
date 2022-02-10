@@ -9,10 +9,16 @@
 namespace Textures {
 	enum class ID {
 		Landscape,
-		Airplane,
+		Eagle,
+		Raptor,
 		Missile
 	};
 }
+
+template<typename Resource, typename Identifier>
+class ResourceHolder;
+
+typedef ResourceHolder<sf::Texture, Textures::ID> TextureHolder;
 
 template<typename Resource, typename Identifier>
 class ResourceHolder {

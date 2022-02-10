@@ -6,7 +6,8 @@
 
 class Game {	
 	sf::RenderWindow window_;
-	ResourceHolder<sf::Texture, Textures::ID> textures_;
+	//ResourceHolder<sf::Texture, Textures::ID> textures_;
+	TextureHolder textures_;
 	sf::Sprite player_;
 	sf::Time time_per_frame_;
 	int player_speed_;

@@ -1,4 +1,5 @@
 #include "game.h"
+#include "source_manager.h"
 
 Game::Game() :window_(sf::VideoMode(640, 480), "SFML Application")
 			, textures_()
@@ -6,9 +7,9 @@ Game::Game() :window_(sf::VideoMode(640, 480), "SFML Application")
 			, time_per_frame_(sf::seconds(1.f / 60.f))
 			, player_speed_(500) {
 	
-	textures_.Load(Textures::ID::Airplane, "Media\\Textures\\Eagle.png");
+	textures_.Load(Textures::ID::Eagle, "Media\\Textures\\Eagle.png");
 
-	player_.setTexture(textures_.Get(Textures::ID::Airplane));
+	player_.setTexture(textures_.Get(Textures::ID::Eagle));
 	player_.setPosition(100.f, 100.f);	
 }
 

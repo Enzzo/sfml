@@ -12,6 +12,3 @@ void Entity::SetVelocity(float vx, float vy) {
 sf::Vector2f Entity::GetVelocity() const {
 	return velocity_;
 }
-
-//--------------------AIRCRAFT-----------------------
-Aircraft::Aircraft(Type type) : type_(type) {}
