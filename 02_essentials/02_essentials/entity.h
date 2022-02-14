@@ -14,4 +14,7 @@ public:
 	void SetVelocity(float, float);
 
 	sf::Vector2f GetVelocity() const;
+
+private:
+	virtual void updateCurrent(sf::Time) override;
 };

@@ -3,12 +3,20 @@
 #include <SFML/Graphics.hpp>
 
 #include "source_manager.h"
+#include "aricraft.h"
+
+enum class Layer {
+	Background,
+	Air,
+	LayerCount //is not used to refer to a layer; instead it stores the total amount of layers
+};
 
 class Game {	
 	sf::RenderWindow window_;
 	//ResourceHolder<sf::Texture, Textures::ID> textures_;
 	TextureHolder textures_;
 	sf::Sprite player_;
+
 	sf::Time time_per_frame_;
 	int player_speed_;
 
