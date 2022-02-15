@@ -13,6 +13,6 @@ public:
 	void drawCurrent(sf::RenderTarget&, sf::RenderStates) const override;
 
 private:
-	Type type_;
-	sf::Sprite sprite_;
+	Type mType;
+	sf::Sprite mSprite;
 };

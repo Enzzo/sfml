@@ -2,17 +2,17 @@
 
 //--------------------ENTITY-----------------------
 void Entity::SetVelocity(sf::Vector2f velocity) {
-	velocity_ = velocity;
+	mVelocity = velocity;
 }
 
 void Entity::SetVelocity(float vx, float vy) {
-	velocity_.x = vx; velocity_.y = vy;
+	mVelocity.x = vx; mVelocity.y = vy;
 }
 
 sf::Vector2f Entity::GetVelocity() const {
-	return velocity_;
+	return mVelocity;
 }
 
 void Entity::updateCurrent(sf::Time dt) {
-	move(velocity_ * dt.asSeconds());
+	move(mVelocity * dt.asSeconds());
 }

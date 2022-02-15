@@ -20,12 +20,12 @@ public:
 
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const = 0;
+	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	virtual void updateCurrent(sf::Time);
 	void updateChildren(sf::Time);
 
 private:
-	std::vector<Ptr> children_;
-	SceneNode* parent_;
+	std::vector<Ptr> mChildren;
+	SceneNode* mParent;
 };

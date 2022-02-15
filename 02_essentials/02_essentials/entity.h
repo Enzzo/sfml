@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 class Entity : public SceneNode {
-	sf::Vector2f velocity_;
+	sf::Vector2f mVelocity;
 
 public:
 	//Entity() = default;

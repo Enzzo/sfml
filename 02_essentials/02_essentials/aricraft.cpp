@@ -9,9 +9,9 @@ Textures::ID ToTextureID(Aircraft::Type type) {
 
 //--------------------AIRCRAFT-----------------------
 Aircraft::Aircraft(Type type, const TextureHolder& textureholder) 
-	: type_(type)
-	, sprite_(textureholder.Get(ToTextureID(type))) {}
+	: mType(type)
+	, mSprite(textureholder.Get(ToTextureID(type))) {}
 
 void Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const{
-	target.draw(sprite_, states);
+	target.draw(mSprite, states);
 }

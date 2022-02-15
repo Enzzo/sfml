@@ -2,17 +2,17 @@
 #include "source_manager.h"
 
 Game::Game() :window_(sf::VideoMode(640, 480), "SFML Application")
-			, textures_()
-			, player_()
-			, time_per_frame_(sf::seconds(1.f / 60.f))
-			, player_speed_(500) {
+			, mTextures()
+			, mPlayer()
+			, mTimePerFrame(sf::seconds(1.f / 60.f))
+			, mPlayerSpeed(500) {
 	
-	textures_.Load(Textures::ID::Eagle, "Media\\Textures\\Eagle.png");
+	mTextures.Load(Textures::ID::Eagle, "Media\\Textures\\Eagle.png");
 
-	player_.setTexture(textures_.Get(Textures::ID::Eagle));
-	sf::FloatRect bounds = player_.getLocalBounds();
-	player_.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
-	player_.setPosition(100.f, 100.f);	
+	mPlayer.setTexture(mTextures.Get(Textures::ID::Eagle));
+	sf::FloatRect bounds = mPlayer.getLocalBounds();
+	mPlayer.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+	mPlayer.setPosition(100.f, 100.f);	
 }
 
 void Game::Run() {
@@ -24,10 +24,10 @@ void Game::Run() {
 		//ProcessEvents();
 		timeSinceLastUpdate += clock.restart();
 		
-		while (timeSinceLastUpdate > time_per_frame_) {
-			timeSinceLastUpdate -= time_per_frame_;
+		while (timeSinceLastUpdate > mTimePerFrame) {
+			timeSinceLastUpdate -= mTimePerFrame;
 			ProcessEvents();
-			Update(time_per_frame_);
+			Update(mTimePerFrame);
 		}
 		
 		Render();
@@ -57,21 +57,21 @@ void Game::ProcessEvents() {
 void Game::Update(const sf::Time deltaTime) {
 	sf::Vector2f movement(0.f, 0.f);
 
-	if (is_moving_up && player_.getPosition().y > 0)
-		movement.y -= player_speed_;
-	if (is_moving_down && player_.getPosition().y < window_.getSize().y)
-		movement.y += player_speed_;
-	if (is_moving_left && player_.getPosition(). x > 0)
-		movement.x -= player_speed_;
-	if (is_moving_right && player_.getPosition().x < window_.getSize().x)
-		movement.x += player_speed_;
+	if (is_moving_up && mPlayer.getPosition().y > 0)
+		movement.y -= mPlayerSpeed;
+	if (is_moving_down && mPlayer.getPosition().y < window_.getSize().y)
+		movement.y += mPlayerSpeed;
+	if (is_moving_left && mPlayer.getPosition(). x > 0)
+		movement.x -= mPlayerSpeed;
+	if (is_moving_right && mPlayer.getPosition().x < window_.getSize().x)
+		movement.x += mPlayerSpeed;
 
-	player_.move(movement * deltaTime.asSeconds());
+	mPlayer.move(movement * deltaTime.asSeconds());
 }
 
 void Game::Render() {
 	window_.clear();
-	window_.draw(player_);
+	window_.draw(mPlayer);
 	window_.display();
 }
 

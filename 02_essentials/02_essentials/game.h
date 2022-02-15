@@ -13,12 +13,12 @@ enum class Layer {
 
 class Game {	
 	sf::RenderWindow window_;
-	//ResourceHolder<sf::Texture, Textures::ID> textures_;
-	TextureHolder textures_;
-	sf::Sprite player_;
+	//ResourceHolder<sf::Texture, Textures::ID> mTextures;
+	TextureHolder mTextures;
+	sf::Sprite mPlayer;
 
-	sf::Time time_per_frame_;
-	int player_speed_;
+	sf::Time mTimePerFrame;
+	int mPlayerSpeed;
 
 	bool is_moving_up = false
 		,is_moving_down = false
