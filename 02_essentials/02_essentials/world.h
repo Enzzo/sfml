@@ -1,5 +1,7 @@
 #pragma once
 
+#include <array>
+
 #include <SFML/Graphics.hpp>
 
 #include "source_manager.h"
@@ -17,20 +19,20 @@ private:
 	void buildScene();
 
 private:
-	enum class Layer {
+	enum Layer {
 		Background,
 		Air,
 		LayerCount
 	};
 
 private:
-	sf::RenderWindow& mWindow;
-	sf::View mWorldView;
-	TextureHolder mTextures;
-	SceneNode mSceneGraph;
-	std::array<SceneNode*, LayerCount> mSceneLayers;
-	sf::FloatRect mWorldBounds;
-	sf::Vector2f mSpawnPosition;
-	float mScrollSpeed;
-	Aircraft* mPlayerAircraft;
+	sf::RenderWindow&					mWindow;
+	sf::View							mWorldView;
+	TextureHolder						mTextures;
+	SceneNode							mSceneGraph;
+	std::array<SceneNode*, LayerCount>	mSceneLayers;
+	sf::FloatRect						mWorldBounds;
+	sf::Vector2f						mSpawnPosition;
+	float								mScrollSpeed;
+	Aircraft*							mPlayerAircraft;
 };
