@@ -15,35 +15,35 @@ Game::Game() :window_(sf::VideoMode(640, 480), "SFML Application")
 	mPlayer.setPosition(100.f, 100.f);	
 }
 
-void Game::Run() {
+void Game::run() {
 
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
 	while (window_.isOpen()) {
-		//ProcessEvents();
+		processEvents();
 		timeSinceLastUpdate += clock.restart();
 		
 		while (timeSinceLastUpdate > mTimePerFrame) {
 			timeSinceLastUpdate -= mTimePerFrame;
-			ProcessEvents();
-			Update(mTimePerFrame);
+			processEvents();
+			update(mTimePerFrame);
 		}
 		
-		Render();
+		render();
 	}
 }
 
-void Game::ProcessEvents() {
+void Game::processEvents() {
 	sf::Event event;
 	while (window_.pollEvent(event)) {
 		switch (event.type) {
 		case sf::Event::EventType::KeyPressed: {
-			HandlePlayerInterrupt(event.key.code, true);
+			handlePlayerInterrupt(event.key.code, true);
 			break;
 		}
 		case sf::Event::EventType::KeyReleased: {
-			HandlePlayerInterrupt(event.key.code, false);
+			handlePlayerInterrupt(event.key.code, false);
 			break;
 		}
 		case sf::Event::Closed: {
@@ -54,7 +54,7 @@ void Game::ProcessEvents() {
 	}
 }
 
-void Game::Update(const sf::Time deltaTime) {
+void Game::update(const sf::Time deltaTime) {
 	sf::Vector2f movement(0.f, 0.f);
 
 	if (is_moving_up && mPlayer.getPosition().y > 0)
@@ -69,13 +69,13 @@ void Game::Update(const sf::Time deltaTime) {
 	mPlayer.move(movement * deltaTime.asSeconds());
 }
 
-void Game::Render() {
+void Game::render() {
 	window_.clear();
 	window_.draw(mPlayer);
 	window_.display();
 }
 
-void Game::HandlePlayerInterrupt(const sf::Keyboard::Key key, const bool is_pressed) {
+void Game::handlePlayerInterrupt(const sf::Keyboard::Key key, const bool is_pressed) {
 	if (key == sf::Keyboard::Key::W) {
 		is_moving_up = is_pressed;
 	}

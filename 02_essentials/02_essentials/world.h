@@ -4,9 +4,15 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "source_manager.h"
+#include "resource_holder.h"
+#include "resource_identifiers.h"
 #include "scene_node.h"
 #include "aricraft.h"
+
+//Forward declaration
+namespace sf {
+	class RenderWindow;
+}
 
 class World : private sf::NonCopyable {
 public:

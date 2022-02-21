@@ -1,15 +1,15 @@
 #include "entity.h"
 
 //--------------------ENTITY-----------------------
-void Entity::SetVelocity(sf::Vector2f velocity) {
+void Entity::setVelocity(sf::Vector2f velocity) {
 	mVelocity = velocity;
 }
 
-void Entity::SetVelocity(float vx, float vy) {
+void Entity::setVelocity(float vx, float vy) {
 	mVelocity.x = vx; mVelocity.y = vy;
 }
 
-sf::Vector2f Entity::GetVelocity() const {
+sf::Vector2f Entity::getVelocity() const {
 	return mVelocity;
 }
 

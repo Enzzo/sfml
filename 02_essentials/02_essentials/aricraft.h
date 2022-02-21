@@ -1,16 +1,18 @@
 #pragma once
 #include "entity.h"
-#include "source_manager.h"
+#include "resource_holder.h"
 
 class Aircraft : public Entity {
 public:
-	enum class Type {
+	enum Type {
 		Eagle, Raptor
 	};
 
 public:
-	explicit Aircraft(Type type, const TextureHolder& textures);
-	void drawCurrent(sf::RenderTarget&, sf::RenderStates) const override;
+	explicit Aircraft(Type, const TextureHolder&);
+	
+private:
+	virtual void drawCurrent(sf::RenderTarget&, sf::RenderStates) const;
 
 private:
 	Type mType;
