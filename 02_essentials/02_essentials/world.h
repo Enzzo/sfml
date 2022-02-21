@@ -7,7 +7,7 @@
 #include "resource_holder.h"
 #include "resource_identifiers.h"
 #include "scene_node.h"
-#include "aricraft.h"
+#include "aircraft.h"
 
 //Forward declaration
 namespace sf {

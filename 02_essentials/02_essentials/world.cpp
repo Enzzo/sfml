@@ -2,8 +2,11 @@
 #include "sprite_node.h"
 
 World::World(sf::RenderWindow& window)
-	:mWindow(window)
+	: mWindow(window)
 	, mWorldView(window.getDefaultView())
+	, mTextures()
+	, mSceneGraph()
+	, mSceneLayers()
 	, mWorldBounds(
 		0.f, //left X position
 		0.f, //top Y position
@@ -11,7 +14,8 @@ World::World(sf::RenderWindow& window)
 		2000.f)	//height
 	, mSpawnPosition(
 		mWorldView.getSize().x / 2.f, //X
-		mWorldBounds.height - mWorldView.getSize().y) //Y
+		mWorldBounds.height - mWorldView.getSize().y / 2.f) //Y
+	, mScrollSpeed(-50.f)
 	, mPlayerAircraft(nullptr) {
 
 	loadTextures();
@@ -21,39 +25,39 @@ World::World(sf::RenderWindow& window)
 }
 
 void World::loadTextures() {
-	mTextures.Load(Textures::ID::Eagle, "Media/Textures/Eagle.png");
-	mTextures.Load(Textures::ID::Raptor, "Media/Textures/Raptor.png");
-	mTextures.Load(Textures::ID::Desert, "Media/Textures/Desert.png");
+	mTextures.load(Textures::ID::Eagle, "Media/Textures/Eagle.png");
+	mTextures.load(Textures::ID::Raptor, "Media/Textures/Raptor.png");
+	mTextures.load(Textures::ID::Desert, "Media/Textures/Desert.png");
 }
 
 void World::buildScene() {
 	for (std::size_t i = 0; i < LayerCount; ++i) {
 		SceneNode::Ptr layer(new SceneNode());
 		mSceneLayers[i] = layer.get();
-		mSceneGraph.AttachChild(std::move(layer));
+		mSceneGraph.attachChild(std::move(layer));
 	}
 
-	sf::Texture& texture = mTextures.Get(Textures::ID::Desert);
+	sf::Texture& texture = mTextures.get(Textures::ID::Desert);
 	sf::IntRect textureRect(mWorldBounds);
 	texture.setRepeated(true);
 
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture, textureRect));
 	backgroundSprite->setPosition(mWorldBounds.left, mWorldBounds.top);
-	mSceneLayers[Background]->AttachChild(std::move(backgroundSprite));
+	mSceneLayers[Background]->attachChild(std::move(backgroundSprite));
 
 	std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::Type::Eagle, mTextures));
 	mPlayerAircraft = leader.get();
 	mPlayerAircraft->setPosition(mSpawnPosition);
-	mPlayerAircraft->SetVelocity(40.f, mScrollSpeed);
-	mSceneLayers[Air]->AttachChild(std::move(leader));
+	mPlayerAircraft->setVelocity(40.f, mScrollSpeed);
+	mSceneLayers[Air]->attachChild(std::move(leader));
 
 	std::unique_ptr<Aircraft> leftEscort(new Aircraft(Aircraft::Type::Raptor, mTextures));
 	leftEscort->setPosition(-80.f, 50.f);
-	mPlayerAircraft->AttachChild(std::move(leftEscort));
+	mPlayerAircraft->attachChild(std::move(leftEscort));
 
 	std::unique_ptr<Aircraft> rightEscort(new Aircraft(Aircraft::Type::Raptor, mTextures));
 	rightEscort->setPosition(80.f, 50.f);
-	mPlayerAircraft->AttachChild(std::move(rightEscort));
+	mPlayerAircraft->attachChild(std::move(rightEscort));
 }
 
 void World::draw() {

@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "resource_holder.h"
-#include "aricraft.h"
+#include "aircraft.h"
 #include "world.h"
 
 enum class Layer {

@@ -1,6 +1,6 @@
 #pragma once
 #include "entity.h"
-#include "resource_holder.h"
+#include "resource_identifiers.h"
 
 class Aircraft : public Entity {
 public:
@@ -9,7 +9,7 @@ public:
 	};
 
 public:
-	explicit Aircraft(Type, const TextureHolder&);
+	Aircraft(Type, const TextureHolder&);
 	
 private:
 	virtual void drawCurrent(sf::RenderTarget&, sf::RenderStates) const;

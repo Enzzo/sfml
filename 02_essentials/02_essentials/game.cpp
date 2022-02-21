@@ -1,6 +1,8 @@
 #include "game.h"
 
-Game::Game() :mWindow(sf::VideoMode(640, 480), "SFML Application")
+const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
+
+Game::Game() :mWindow(sf::VideoMode(640, 480), "World")
 			, mWorld(mWindow)
 			, mFont()
 			, mStatisticsText()

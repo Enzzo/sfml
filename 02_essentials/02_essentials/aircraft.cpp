@@ -1,6 +1,5 @@
-#include "aricraft.h"
+#include "aircraft.h"
 #include "resource_holder.h"
-#include "resource_identifiers.h"
 
 Textures::ID toTextureID(Aircraft::Type type) {
 	switch (type) {
@@ -11,7 +10,7 @@ Textures::ID toTextureID(Aircraft::Type type) {
 }
 
 //--------------------AIRCRAFT-----------------------
-Aircraft::Aircraft(Type type, const TextureHolder& textureholder) 
+Aircraft::Aircraft(Type type, const TextureHolder& textureholder)
 	: mType(type)
 	, mSprite(textureholder.get(toTextureID(type))) {
 	sf::FloatRect bounds = mSprite.getLocalBounds();
