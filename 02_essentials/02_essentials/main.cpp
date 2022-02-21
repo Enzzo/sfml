@@ -7,7 +7,7 @@
 int main() {
 	try {
 		Game game;
-		game.Run();
+		game.run();
 	}
 	catch (std::exception& e) {
 		std::cout << "\nEXCEPTION: " << e.what() << std::endl;

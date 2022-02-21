@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "source_manager.h"
+#include "resource_holder.h"
 #include "aricraft.h"
 #include "world.h"
 

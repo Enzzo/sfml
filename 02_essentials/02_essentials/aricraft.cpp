@@ -2,17 +2,21 @@
 #include "resource_holder.h"
 #include "resource_identifiers.h"
 
-Textures::ID ToTextureID(Aircraft::Type type) {
+Textures::ID toTextureID(Aircraft::Type type) {
 	switch (type) {
-	case Aircraft::Type::Eagle: return Textures::ID::Eagle;
-	case Aircraft::Type::Raptor: return Textures::ID::Raptor;
+	case Aircraft::Eagle: return Textures::Eagle;
+	case Aircraft::Raptor: return Textures::Raptor;
 	}
+	return Textures::Eagle;
 }
 
 //--------------------AIRCRAFT-----------------------
 Aircraft::Aircraft(Type type, const TextureHolder& textureholder) 
 	: mType(type)
-	, mSprite(textureholder.Get(ToTextureID(type))) {}
+	, mSprite(textureholder.get(toTextureID(type))) {
+	sf::FloatRect bounds = mSprite.getLocalBounds();
+	mSprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+}
 
 void Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const{
 	target.draw(mSprite, states);
