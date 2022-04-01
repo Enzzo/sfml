@@ -2,11 +2,12 @@
 #include "resource_holder.h"
 
 Textures::ID toTextureID(Aircraft::Type type) {
-	switch (type) {
+	/*switch (type) {
 	case Aircraft::Eagle: return Textures::Eagle;
 	case Aircraft::Raptor: return Textures::Raptor;
 	}
-	return Textures::Eagle;
+	return Textures::Eagle;*/
+	return (type == Aircraft::Raptor) ? Textures::Raptor : Textures::Eagle;
 }
 
 //--------------------AIRCRAFT-----------------------
