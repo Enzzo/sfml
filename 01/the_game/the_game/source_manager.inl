@@ -26,8 +26,8 @@ void ResourceHolder<resource, identifier>::load(	const identifier id,
 	assert(inserted.second);
 }
 
-template<class resource, class identifier>
-const resource& ResourceHolder<resource, identifier>::get(const identifier id) const {
+template<typename resource, typename identifier>
+resource& ResourceHolder<resource, identifier>::get(identifier id) const {
 	auto found = _texture_map.find(id);
 	assert(found != _texture_map.end());
 	return *found->second;

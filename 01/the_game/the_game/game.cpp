@@ -7,7 +7,7 @@ Game::Game() :	_window(sf::VideoMode(640, 480), "Title"),
 				_is_moving_down(false),
 				_is_moving_left(false),
 				_is_moving_right(false),
-				_player_speed(50000.0f),
+				_player_speed(500.0f),
 				_time_per_frame(sf::seconds(1.f/60.f))
 {
 	if (!_texture.loadFromFile("D:\\dev\\git\\sfml\\src\\png\\Eagle.png")) {
@@ -20,14 +20,14 @@ Game::Game() :	_window(sf::VideoMode(640, 480), "Title"),
 void Game::run() {
 	sf::Clock clock;
 	sf::Time time_since_last_update = sf::Time::Zero;
-	proccess_events();
+
 	while (_window.isOpen()) {
 		time_since_last_update += clock.restart();
 
 		while (time_since_last_update > _time_per_frame) {
 			time_since_last_update -= _time_per_frame;
 			proccess_events();
-			update(time_since_last_update);
+			update(_time_per_frame);
 		}		
 		render();
 	}
