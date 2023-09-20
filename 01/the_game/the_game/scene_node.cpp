@@ -1,4 +1,4 @@
-#include "node.h"
+#include "sprite_node.h"
 #include <assert.h>
 
 void SceneNode::attach_child(ptr child) {
@@ -17,6 +17,25 @@ SceneNode::ptr SceneNode::detach_child(const SceneNode& node) {
 	return result;
 }
 
+void SceneNode::update(const sf::Time delta_time) {
+	update_current(delta_time);
+	update_children(delta_time);
+}
+
+sf::Transform SceneNode::get_world_transform() const {
+	sf::Transform transform = sf::Transform::Identity;
+
+	for (const SceneNode* node = this; node != nullptr; node = node->_parent) {
+		transform = node->getTransform() * transform;
+	}
+	
+	return transform;
+}
+
+sf::Vector2f SceneNode::get_world_position() const {
+	return get_world_transform() * sf::Vector2f();
+}
+
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	states.transform *= getTransform();
 
@@ -30,5 +49,15 @@ void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 void SceneNode::draw_current(sf::RenderTarget& target, sf::RenderStates states) const {
 	for (const ptr& p : _children) {
 		target.draw(*p, states);
+	}
+}
+
+void SceneNode::update_current(const sf::Time delta_time) {
+
+}
+
+void SceneNode::update_children(const sf::Time delta_time) {
+	for (const ptr& child : _children) {
+		child->update(delta_time);
 	}
 }

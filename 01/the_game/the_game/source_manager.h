@@ -6,7 +6,7 @@
 #include "SFML/Graphics.hpp"
 
 namespace Textures {
-	enum ID {
+	enum class ID {
 		Landscape,
 		Airplane,
 		Missile,

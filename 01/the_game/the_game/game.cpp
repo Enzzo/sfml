@@ -67,7 +67,7 @@ void Game::handle_player_input(const sf::Keyboard::Key& key, bool is_pressed) {
 	}
 }
 
-void Game::update(const sf::Time& deltaTime) {
+void Game::update(const sf::Time deltaTime) {
 	sf::Vector2f movement(.0f, .0f);
 	if (_is_moving_up) movement.y -= _player_speed;
 	if (_is_moving_down) movement.y += _player_speed;

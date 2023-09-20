@@ -11,7 +11,7 @@ public:
 private:
 	void proccess_events();
 	void handle_player_input(const sf::Keyboard::Key& key, bool is_pressed);
-	void update(const sf::Time&);
+	void update(const sf::Time);
 	void render();
 
 private:
