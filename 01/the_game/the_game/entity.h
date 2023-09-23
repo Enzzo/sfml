@@ -14,7 +14,7 @@ public:
 
 	virtual void update_current(const sf::Time) override;
 
-	inline const sf::Vector2f get_velocity() const;
+	sf::Vector2f get_velocity() const;
 
 private:
 	sf::Vector2f _velocity;

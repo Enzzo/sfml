@@ -12,6 +12,6 @@ void Entity::update_current(const sf::Time delta_time) {
 	move(_velocity * delta_time.asSeconds());
 }
 
-const sf::Vector2f Entity::get_velocity() const {
+sf::Vector2f Entity::get_velocity() const {
 	return _velocity;
 }

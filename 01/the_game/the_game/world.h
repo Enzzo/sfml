@@ -6,12 +6,19 @@
 #include "source_manager.h"
 #include "scene_node.h"
 #include "aircraft.h"
+#include "command_queue.h"
 
+//--------------------------------------------------+
+//					class World 					|
+//--------------------------------------------------+
 class World : private sf::NonCopyable {
 public:
 	explicit	World(sf::RenderWindow& window);
+	
 	void		update(sf::Time dt);
 	void		draw();
+
+	CommandQueue& get_command_queue();
 
 private:
 	void		load_textures();
@@ -35,4 +42,5 @@ private:
 	sf::Vector2f		_spawn_position;
 	float				_scroll_speed;
 	Aircraft*			_player_aircraft;
+	CommandQueue		_command_queue;
 };

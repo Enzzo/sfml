@@ -36,6 +36,35 @@ sf::Vector2f SceneNode::get_world_position() const {
 	return get_world_transform() * sf::Vector2f();
 }
 
+//--------------------------------------------------+
+//					class SceneNode					|
+//--------------------------------------------------+
+//					void get_category()	 			|
+//--------------------------------------------------+
+unsigned int SceneNode::get_category() const {
+	return Category::Scene;
+}
+
+//--------------------------------------------------+
+//					class SceneNode					|
+//--------------------------------------------------+
+//					void on_command					|
+//--------------------------------------------------+
+void SceneNode::on_command(const Command& command, sf::Time dt) {
+	if (command.category & get_category()) {
+		command.action(*this, dt);
+	}
+
+	for (ptr& child : _children) {
+		child->on_command(command, dt);
+	}
+}
+
+//--------------------------------------------------+
+//					class SceneNode					|
+//--------------------------------------------------+
+//					void draw()	 					|
+//--------------------------------------------------+
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	states.transform *= getTransform();
 

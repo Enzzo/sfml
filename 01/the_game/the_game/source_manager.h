@@ -7,7 +7,7 @@
 
 namespace Textures {
 	enum class ID {
-		Landscape,
+		Desert,
 		Airplane,
 		Missile,
 		Eagle,
