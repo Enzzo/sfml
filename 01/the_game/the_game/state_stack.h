@@ -6,6 +6,9 @@
 
 #include "SFML/Graphics.hpp"
 
+#include "state_identifiers.h"
+#include "state.h"
+
 //--------------------------------------------------+
 //				class StateStack					|
 //--------------------------------------------------+
@@ -18,7 +21,7 @@ public:
 	};
 
 public:
-	explicit	StateStack(State::Context context);
+	explicit	StateStack(State::Context context) : _context(context) {};
 
 	template<typename T>
 	void		register_state(States::ID state_id);
@@ -34,7 +37,7 @@ public:
 	bool		is_empty()const;
 
 private:
-	State::Ptr	create_state(States::ID state_id);
+	State::ptr	create_state(States::ID state_id);
 	void		apply_pending_changes();
 
 private:
@@ -45,8 +48,20 @@ private:
 	};
 
 private:
-	std::vector<State::Ptr>		_stack;
+	std::vector<State::ptr>		_stack;
 	std::vector<PendingChange>	_pending_list;
 	State::Context				_context;
-	std::map<States::ID, std::function<State::Ptr()>> _factories;
+	std::map<States::ID, std::function<State::ptr()>> _factories;
+};
+
+//--------------------------------------------------+
+//				class StateStack					|
+//--------------------------------------------------+
+//			void register_state						|
+//--------------------------------------------------+
+template<typename T>
+void StateStack::register_state(States::ID state_id) {
+	_factories[state_id] = [this]() {
+		return State::ptr(new T(*this, _context));
+	};
 };

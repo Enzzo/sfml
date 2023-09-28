@@ -12,8 +12,15 @@ namespace Textures {
 		Missile,
 		Eagle,
 		Raptor
-	};	
-}
+	};
+};
+
+namespace Fonts {
+	enum class ID {
+		Main
+	};
+};
+
 template<class resource, class identifier>
 class ResourceHolder {
 public:
@@ -25,9 +32,10 @@ public:
 	resource& get(identifier) const;
 
 private:
-	std::map<identifier, std::unique_ptr<resource>> _texture_map;
+	std::map<identifier, std::unique_ptr<resource>> _src_map;
 };
 
 typedef ResourceHolder<sf::Texture, Textures::ID> TextureHolder;
+typedef ResourceHolder<sf::Font, Fonts::ID> FontHolder;
 
  #include "source_manager.inl"
