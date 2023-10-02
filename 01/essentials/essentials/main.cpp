@@ -7,6 +7,7 @@
 #include "animator.h"
 
 void init_shape(sf::RectangleShape& shape, const sf::Vector2f& pos, const sf::Color& color);
+void handle_player_input();
 
 int main() {
 
@@ -93,4 +94,8 @@ void init_shape(sf::RectangleShape& shape, const sf::Vector2f& pos, const sf::Co
 	shape.setFillColor(color);
 	shape.setPosition(pos);
 	shape.setOrigin(shape.getSize() * .5f);
+}
+
+void handle_player_input() {
+
 }
