@@ -13,12 +13,33 @@ int main() {
 
 	sf::RenderWindow window(sf::VideoMode(640, 480), "Title", sf::Style::Default);
 
+	sf::Vector2u w_size = window.getSize();
+	sf::View view(sf::FloatRect(0, 0, w_size.x, w_size.y));
+	sf::View view2(sf::FloatRect(0, 0, w_size.x, w_size.y));
+
+	//	The view is centered around the world point (0, 0)
+	view.setCenter(sf::Vector2f(0, 0));
+	view2.setCenter(sf::Vector2f(0, 0));
+
+	view.setViewport(sf::FloatRect(0.0f, 0.0f, 0.5f, 0.5f));
+	view2.setViewport(sf::FloatRect(0.5f, 0.5f, 0.5f, 0.5f));
+
+	window.setView(view);
+	window.setView(view2);
+
 	window.setFramerateLimit(60);
 	
 	sf::Vector2i sprite_size(16, 16);
 	sf::Sprite sprite;// (asset_manager::instance()->get_texture("..\\src\\img\\gem_blue.png"));
-	sprite.setPosition(100, 100);
+	
+	sprite.setOrigin(static_cast<sf::Vector2f>(sprite_size) * 0.5f); // sprite origin at it's center
+	sprite.setPosition(0, 0);
 	sprite.setScale(5, 5);
+	
+	sf::CircleShape debug_circle(.5f);
+	debug_circle.setPosition(sprite.getPosition());
+	debug_circle.setOutlineColor(sf::Color::Red);
+	debug_circle.setOutlineThickness(1.0f);
 
 	animator animator(sprite);
 	
@@ -84,6 +105,7 @@ int main() {
 
 		window.clear();
 		window.draw(sprite);
+		window.draw(debug_circle);
 		window.display();
 	}
 
