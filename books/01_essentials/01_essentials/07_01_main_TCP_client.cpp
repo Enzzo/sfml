@@ -2,10 +2,10 @@
 
 #include <SFML/Network.hpp>
 
-int main_client() {
+int main0701c() {
 
 	sf::TcpSocket tcp_socket;
-	if (tcp_socket.connect("192.168.0.102", 45000) != sf::Socket::Done) {
+	if (tcp_socket.connect("localhost", 45000) != sf::Socket::Done) {
 		// connection failed;
 		std::cerr << "connection failed";
 		return -1;
@@ -21,6 +21,6 @@ int main_client() {
 	// send some data to the other client
 
 	tcp_socket.disconnect();
-
+	system("pause");
 	return 0;
 }

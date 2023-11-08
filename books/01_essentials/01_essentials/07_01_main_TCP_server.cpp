@@ -2,7 +2,7 @@
 
 #include <SFML/Network.hpp>
 
-int main() {
+int main0701s() {
 
 	// start listening for incoming sockets
 	sf::TcpListener listener;
@@ -27,6 +27,6 @@ int main() {
 	}
 
 	std::cout << data << std::endl;
-
+	system("pause");
 	return 0;
 }
